@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Agregar Ingreso / Egreso</h4>
+        <p class="card-description">Especifique el monto y el tipo</p>
+
+        <form [formGroup]="incomeOutForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label>Description</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Description"
+              name="description"
+              formControlName="description"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Amount</label>
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Amount"
+              name="amount"
+              formControlName="amount"
+            />
+            <p>Must be a positive amount.</p>
+          </div>
+
+          <div class="form-group">
+            <label>Type</label>
+            <br />
+            <button
+              (click)="type = 'O'"
+              type="button"
+              class="btn btn-primary btn-block"
+              *ngIf="type === 'I'"
+            >
+              Income
+            </button>
+            <button
+              type="button"
+              (click)="type = 'I'"
+              class="btn btn-warning btn-block"
+              *ngIf="type === 'O'"
+            >
+              Out
+            </button>
+          </div>
+
+          <hr />
+          <button
+            [disabled]="incomeOutForm.invalid || loading"
+            type="submit"
+            class="btn btn-success mr-2"
+          >
+            <span *ngIf="loading"
+              ><i class="fa fa-spin fa-sync"></i>Saving</span
+            >
+            <span *ngIf="!loading"><i class="fa fa-save"></i>Add</span>
+          </button>
+
+          <!-- 
+                <button disabled class="btn btn-success mr-2">
+                  <i class="fa fa-spin fa-sync"></i>
+                  Espere por favor...
+                </button> 
+              -->
+
+          <button type="reset" class="btn btn-light">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
